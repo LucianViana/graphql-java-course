@@ -10,10 +10,10 @@ import java.util.List;
 
 public class StaticCountriesDataFetcher implements DataFetcher<List<Country>> {
     private final static List<Country> COUNTRIES = List.of(
-            new Country("CH", "Switzerland", 1000, 1000, "Bern"),
-            new Country("US", "United States Of America", 2000, 2000, "Washington"),
-            new Country("FR", "France", 3000, 3000, "Paris"),
-            new Country("ES", "Spain", 4000, 4000, "Barcelona")
+            new Country("P", "Paris", 4000, 4000, "Paris"),
+            new Country("M", "Madrid", 2000, 2000, "Madrid"),
+            new Country("B", "Switzerland", 1000, 1000, "Bern"),
+            new Country("A", "Washington", 3000, 3000, "Washington")
     );
     @Override
     public List<Country> get(DataFetchingEnvironment environment) {

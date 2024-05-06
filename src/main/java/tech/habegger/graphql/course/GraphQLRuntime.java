@@ -8,6 +8,7 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import tech.habegger.graphql.course.fetchers.StaticCityDataFetcher;
 import tech.habegger.graphql.course.fetchers.StaticCountriesDataFetcher;
 
 import java.io.IOException;
@@ -42,6 +43,9 @@ public class GraphQLRuntime {
         RuntimeWiring.Builder runtimeWiring = RuntimeWiring.newRuntimeWiring()
                 .type("Query", builder ->
                         builder.dataFetcher("countries", new StaticCountriesDataFetcher())
+                )
+                .type("Country", builder ->
+                        builder.dataFetcher("capital", new StaticCityDataFetcher())
                 );
 //                .type("Country", builder -> builder
 //                        .dataFetcher("area", new WFBFieldDataFetcher("/Geography/Area/total/text"))

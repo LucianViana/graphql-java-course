@@ -4,28 +4,28 @@ type Query {
 
 type Country {
     code: ID
-    name: String
-    population: String
-    area: String
+    name: String!
+    population: Int
+    area: Int
     capital: City
-    province: [Province]
+    province: [Province!]
 }
 
 type City {
-    name: String
+    name: String!
     population: Int
     geoLocation: GeoCoord
     elevation: Int
-    province: String
+    province: Province
 }
 
 type GeoCoord {
-    latitude: Float
-    Logitude: Float
+    latitude: Float!
+    logitude: Float!
 }
 
 type Province {
-    name: String
+    name: String!
     populatin: Int
     capital: City
 }

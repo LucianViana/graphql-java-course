@@ -42,6 +42,18 @@ class GraphQLExampleRuntimeTest {
         // Then
         Map<String, Object> data = result.getData();
         assertThat(data).isNotNull();
+        assertThat(data).containsKey("countries").extracting("countries").isInstanceOf(List.class);
+        var countries = (List<Map<String, Object>>) data.get("countries");
+        assertThat(countries).hasSize(4);
+        assertThat(countries).contains(Map.of(
+                "name", "Switzerland",
+                "population", 1000,
+                "capital", Map.of(
+                        "name", "Bern",
+                        "population", 1000
+                )
+        ));
+
         assertThat(result.getErrors()).isEmpty();
     }
     @Test
