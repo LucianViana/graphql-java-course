@@ -5,8 +5,9 @@ import org.eclipse.jetty.http.HttpHeader;
 
 import org.eclipse.jetty.http.HttpStatus;
 
+import org.eclipse.jetty.io.Content;
 import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.server.HttpInput;
+//import org.eclipse.jetty.server.HttpInput;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Response;
 import org.eclipse.jetty.util.Callback;
@@ -34,7 +35,7 @@ public class GraphiQLHandler extends Handler.Abstract {
     public boolean handle(Request httpRequest, Response response, Callback callback) throws Exception {
         response.setStatus(HttpStatus.OK_200);
         response. getHeaders().add(HttpHeader.CONTENT_TYPE, "text/html; charset=UTF-8");
-        HttpInput.Content.Sink.write(response, true, graphQLHtml, callback);
+        Content.Sink.write(response, true, graphQLHtml, callback);
         return true;
     }
 
