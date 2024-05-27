@@ -1,21 +1,18 @@
 package tech.habegger.graphql.course.http;
 
 import org.apache.logging.log4j.core.util.IOUtils;
-import org.eclipse.jetty.http.HttpHeader;
-
 import org.eclipse.jetty.http.HttpStatus;
-
 import org.eclipse.jetty.io.Content;
-import org.eclipse.jetty.server.Handler;
-//import org.eclipse.jetty.server.HttpInput;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Response;
 import org.eclipse.jetty.util.Callback;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-
 import java.nio.charset.StandardCharsets;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.http.HttpHeader;
 
 public class GraphiQLHandler extends Handler.Abstract {
     private final String graphQLHtml;
@@ -34,7 +31,7 @@ public class GraphiQLHandler extends Handler.Abstract {
     @Override
     public boolean handle(Request httpRequest, Response response, Callback callback) throws Exception {
         response.setStatus(HttpStatus.OK_200);
-        response. getHeaders().add(HttpHeader.CONTENT_TYPE, "text/html; charset=UTF-8");
+        response.getHeaders().add(HttpHeader.CONTENT_TYPE, "text/html; charset=UTF-8");
         Content.Sink.write(response, true, graphQLHtml, callback);
         return true;
     }
