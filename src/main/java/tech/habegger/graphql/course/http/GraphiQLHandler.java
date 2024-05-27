@@ -29,7 +29,7 @@ public class GraphiQLHandler extends Handler.Abstract {
     }
 
     @Override
-    public boolean handle(Request httpRequest, Response response, Callback callback) throws Exception {
+    public boolean handle(Request httpRequest, Response response, Callback callback) {
         response.setStatus(HttpStatus.OK_200);
         response.getHeaders().add(HttpHeader.CONTENT_TYPE, "text/html; charset=UTF-8");
         Content.Sink.write(response, true, graphQLHtml, callback);
