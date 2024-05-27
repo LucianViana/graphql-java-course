@@ -65,8 +65,7 @@
 <script>
       const root = ReactDOM.createRoot(document.getElementById('graphiql'));
       const fetcher = GraphiQL.createFetcher({
-        url: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
-        headers: { 'X-Example-Header': 'foo' },
+        url: 'http://localhost:8080/graphql/'
       });
       const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin();
       root.render(

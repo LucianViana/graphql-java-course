@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
+
 public class GraphQLRuntime {
     private final GraphQL graphql;
 
@@ -31,11 +33,13 @@ public class GraphQLRuntime {
         SchemaParser schemaParser = new SchemaParser();
         try(InputStream is = GraphQLRuntime.class.getResourceAsStream("/schema.graphqls")) {
             assert is != null;
-            Reader reader =  new InputStreamReader(is, StandardCharsets.UTF_8);
-            return schemaParser.parse(reader);
+            Reader schemaReader =  new InputStreamReader(is, StandardCharsets.UTF_8);
+            return schemaParser.parse(schemaReader);
         }
     }
-
+    public ExecutionResult execute(String query) {
+        return execute(query, null, null);
+    }
     static RuntimeWiring buildWiring() {
         RuntimeWiring.Builder runtimeWiring = RuntimeWiring.newRuntimeWiring()
                 .type("Query", builder ->
@@ -53,12 +57,20 @@ public class GraphQLRuntime {
         return runtimeWiring.build();
     }
 //}
-    public ExecutionResult execute(String query) {
-        ExecutionInput executionInput = ExecutionInput.newExecutionInput()
-                .query(query)
-                //.variables(variables)
-                .build();
-        return graphql.execute(executionInput);
+
+
+    public ExecutionResult execute(String query, Map<String, Object> variables, String operation) {
+        ExecutionInput.Builder executionInput = ExecutionInput.newExecutionInput()
+                .query(query);
+        if(variables != null) {
+            executionInput.variables(variables);
+        }
+        if(operation != null) {
+            executionInput.operationName(operation);
+        }
+
+        return graphql.execute(executionInput.build());
+
     }
 }
 
