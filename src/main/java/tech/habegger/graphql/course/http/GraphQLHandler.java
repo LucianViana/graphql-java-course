@@ -49,7 +49,7 @@ public class GraphQLHandler extends Handler.Abstract {
             // Handle application/json
             case "application/json" -> unmarshalJsonReguest(httpRequestReader);
             // Anything else -> Bad Request
-            default -> throw new UnsupportedOperationException("Don't know two handle %s".formatted(contentType));
+            default -> throw new UnsupportedOperationException("Dont know two handle".formatted(contentType));
         };
     }
 
